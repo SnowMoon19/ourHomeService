@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fxj.recordmanager.mapper.record.FirstRecordMapper">
+    <!-- 如果有不一样的类型可以在这设置resultMap-->
+    <resultMap id="test" type="com.fxj.recordmanager.entity.dao.record.FirstRecord">
+        <result column="creator_id" property="creatorId"/>
+    </resultMap>
+
+    <select id="getFirstRecordListByUserId" resultType="com.fxj.recordmanager.entity.dao.record.FirstRecord">
+        SELECT * FROM record_first
+        WHERE (creator_id = #{userId} OR creator_id = #{anotherId})
+        AND deleted = 0
+    </select>
+
+    <select id="getFirstRecord" resultType="com.fxj.recordmanager.entity.dao.record.FirstRecord">
+        SELECT * FROM record_first
+        WHERE record_id = #{recordId}
+    </select>
+
+
+    <update id="updateFirstRecord">
+        UPDATE record_first
+        <set>
+            <if test="priority != null and priority != ''">
+                priority = #{priority},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="type != null and type != ''">
+                type = #{type},
+            </if>
+            <if test="time != null and time != ''">
+                time = #{time},
+            </if>
+        </set>
+        <if test="recordId != null and recordId != ''">
+            WHERE record_id = #{recordId}
+        </if>
+    </update>
+
+</mapper>

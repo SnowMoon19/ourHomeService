@@ -1,0 +1,23 @@
+package com.fxj.recordmanager.utils.io;
+
+import java.io.File;
+
+public class CreateFileUtil {
+    public static boolean createDir(String destDirName) {
+        File dir = new File(destDirName);
+        if (dir.exists()) {
+            System.out.println("创建目录" + destDirName + "失败，目标目录已经存在");
+            return false;
+        }
+        if (!destDirName.endsWith(File.separator)) {
+            destDirName = destDirName + File.separator;
+        }
+        //创建目录
+        if (dir.mkdirs()) {
+            return true;
+        } else {
+            System.out.println("创建目录" + destDirName + "失败！");
+            return false;
+        }
+    }
+}
