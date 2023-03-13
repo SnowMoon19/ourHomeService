@@ -1,0 +1,28 @@
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true   #开启页面表单的Rest功能
+  servlet:
+    multipart:
+      max-request-size: 100MB # 上传文件总的最大值
+      max-file-size: 100MB # 单个文件的最大值
+
+  datasource: # 连接mysql
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ourhome?serverTimezone=GMT%2B8&characterEncoding=utf-8&userSSL=false
+    username: root
+    password: ffxxjj199919
+
+logging:
+  file:
+    name: D:/var/log/spring_log.log
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.fxj.usermanager.entity
+
+server:
+  port: 8013
